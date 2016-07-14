@@ -1,0 +1,20 @@
+#+TITLE: Hacking Emacs
+#+AUTHOR: Jethro Kuan
+#+LATEX_CLASS: org-article
+
+#+INCLUDE: "./preface.org"
+#+INCLUDE: "./introduction.org"
+#+INCLUDE: "./taming-the-beast.org"
+#+INCLUDE: "./managing-the-workspace.org"
+#+INCLUDE: "./thoughtspeed-motion.org"
+#+INCLUDE: "./project-management.org"
+#+INCLUDE: "./icing-on-the-cake.org"
+
+** Table of Contents                                               :noexport:
+1. [[file:preface.org][Preface]]
+2. [[file:introduction.org][Introduction]]
+3. [[file:taming-the-beast.org][Taming the Beast]]
+4. [[file:managing-the-workspace.org][Managing the Workspace]]
+5. [[file:thoughtspeed-motion.org][Thoughtspeed Motion]]
+6. [[file:project-management.org][Project Management]]
+7. [[file:icing-on-the-cake.org][Icing on the Cake]]

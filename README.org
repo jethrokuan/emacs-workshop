@@ -1,0 +1,7 @@
+* Hacking Emacs (WIP)
+** Introduction
+This is an attempt at producing course material for Emacs. The material is highly opinionated. For example, I handpick certain MELPA packages like /use-package/ to introduce.
+
+The pdf file can be found [[./hacking-emacs.pdf][here]].
+
+🕮 [[file:hacking-emacs.org][READ ME NOW]]

@@ -1,0 +1,176 @@
+* Taming the Beast
+Vanilla Emacs works in a variety of unfortunate ways. These defaults have grown a resistance to change over the decades.
+
+In this chapter, we perform tweaking on Emacs minutiae to improve usability, and simultaneously learn how Emacs is customized.
+
+** Customizing Emacs
+During initialization, Emacs attempts to load an /init/ file. The /init/ file is a Lisp program which is processed top-down. The scripting language for Emacs is aptly named *Emacs Lisp*. Emacs Lisp files typically have the file extension =.el=.
+
+#+BEGIN_QUOTE
+PROTIP: To load vanilla Emacs, run =emacs= with the command-line switch =-q=. This will come in useful when your configuration file breaks.
+#+END_QUOTE
+
+Emacs searches for /init/ files in several locations:
+
+1. =~/.emacs=
+2. =~/.emacs.el=
+3. =~/.emacs.d/init.el=
+
+The 3rd option =~/.emacs.d/init.el= is recommended. Having a dedicated folder for Emacs-related configuration simplifies versioning.
+
+If you haven't done so, create a blank file =init.el= in =~/.emacs.d=.
+
+The tweaks are listed in order of importance. To enable them, copy them into the =init.el= file.
+
+*** Enabling Package Archives
+[[https://melpa.org/#/][MELPA]] is the de-facto package archive for Emacs. Because it is not enabled by default, we add it to the list of =package-archives=.
+
+In similar effect, we enable the Org-mode repository, which contains the most up-to-date version of =org-with-contrib=.
+
+#+BEGIN_SRC emacs-lisp
+(when (>= emacs-major-version 24)
+  (require 'package)
+  (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
+  (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)
+  (package-initialize))
+#+END_SRC
+
+The more security conscious will note that packages are fetched using HTTP, instead of HTTPS. HTTPS, however, did not work for me. Refer [[https://glyph.twistedmatrix.com/2015/11/editor-malware.html][her]]e for the reasons why you might want to do so, and how to do it.
+
+*** Setting User Details
+These variables are used in some packages:
+
+#+BEGIN_SRC emacs-lisp
+(setq user-full-name "John Appleseed"
+      user-mail-address "john@me.com")
+#+END_SRC
+*** UI Cruft
+All these UI cruft take up precious screen estate, and should be removed.
+
+#+BEGIN_SRC emacs-lisp
+(tooltip-mode -1)
+(tool-bar-mode -1)
+(menu-bar-mode -1)
+(scroll-bar-mode -1)
+#+END_SRC
+*** Startup Screen
+More useless stuff to be removed.
+
+#+BEGIN_SRC emacs-lisp
+(setq inhibit-splash-screen t)
+(setq inhibit-startup-message t)
+#+END_SRC
+*** Use-package
+[[https://github.com/jwiegley/use-package][use-package]] is a macro which allows you to isolate package configuration in a organized and performant fashion. It was created by John Wiegley, the current Emacs maintainer.
+
+We'll be using it to install packages, so let's go ahead and add that in.
+
+#+BEGIN_SRC emacs-lisp
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package))
+
+(eval-and-compile
+  (defvar use-package-verbose t) 
+  (require 'cl)
+  (require 'use-package)
+  (require 'bind-key)
+  (require 'diminish)
+  (setq use-package-always-ensure t))
+#+END_SRC
+
+Here, we set =use-package-always-ensure= to =true=, so if a package is found missing, it will be installed automatically.
+*** y/n
+It is easier to type y/n than to type yes/no.
+
+#+BEGIN_SRC emacs-lisp
+(defalias 'yes-or-no-p 'y-or-n-p)
+#+END_SRC
+
+*** Custom Files
+Emacs comes with a built-in interface to customize variable values such as font-faces. However, these get added to the bottom of your =init.el= file, which ends up looking like a mess. I like to keep these things saved in a separate file, and load them in.
+
+#+BEGIN_SRC emacs-lisp
+(setq custom-file "~/.emacs.d/custom.el")
+(load custom-file)
+#+END_SRC
+
+*** Backup Files
+Backup files are important, but they tend to litter your directories. The following snippet moves the temp files to the system temp directory.
+#+BEGIN_SRC emacs-lisp
+(setq backup-directory-alist
+      `((".*" . ,temporary-file-directory)))
+(setq auto-save-file-name-transforms
+      `((".*" ,temporary-file-directory t)))
+#+END_SRC
+
+**** Purging Old Backup Files
+If you put the following code into your =init.el=, Emacs will look through the temp directory on startup and purge old backup files.
+#+BEGIN_SRC emacs-lisp
+(let ((week (* 60 60 24 7))
+      (current (float-time (current-time))))
+  (dolist (file (directory-files temporary-file-directory t))
+    (when (and (backup-file-name-p file)
+               (> (- current (float-time (fifth (file-attributes file))))
+                  week))
+      (message "%s" file)
+      (delete-file file))))
+#+END_SRC
+*** Overwriting Text (Optional)
+I'm used to having text being overwritten when highlighted. These always saves me a few keystrokes.
+
+#+BEGIN_SRC emacs-lisp
+(delete-selection-mode +1)
+#+END_SRC
+
+*** Default Font (Optional)
+Because I love mononoki.
+
+#+BEGIN_SRC emacs-lisp
+(defvar emacs-english-font "mononoki Regular 14"
+  "the font name of English.")
+
+(defun font-exist-p (fontname)
+  "Test if this font is exist or not.
+  This function only work on GUI mode, on terminal it just
+  return nil since you can't set font for emacs on it."
+  (if (or (not fontname) (string= fontname "") (not (display-graphic-p)))
+      nil
+    (if (not (x-list-fonts fontname))
+        nil t)))
+
+(if (font-exist-p emacs-english-font)
+    (setq default-frame-alist '((emacs-english-font))))
+#+END_SRC
+
+*** Tabs vs Spaces (Optional)
+I'm a fan of the 2 spaces rule.
+
+#+BEGIN_SRC emacs-lisp
+(setq-default tab-width 2)
+(setq-default indent-tabs-mode nil)
+#+END_SRC
+
+** Theming
+There are a [[https://emacsthemes.com/][myraid]] of themes available for your picking. Here I list the better ones:
+
+1. Zenburn
+2. Solarized
+3. Leuven (has an impressive org-mode theme)
+4. Monokai
+5. Tomorrow by Sanityinc
+6. Darkorai
+
+I'm currently using [[https://github.com/11111000000/tao-theme-emacs][tao]], a monochrome theme, with personal customizations for org-mode.
+
+To enable a theme, find the relevant name of the theme on MELPA and add in the following snippet of code:
+
+#+BEGIN_SRC emacs-lisp
+(use-package tao-theme
+  :init
+  (load-theme 'tao-yang t))
+#+END_SRC
+
+At this point you should have quite a hefty amount of modification done. Remember to save your configuration directory into version control.
+
+*** 🢒 [[file:managing-the-workspace.org][Managing The Workspace]]                                   :noexport:

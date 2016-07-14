@@ -1,0 +1,39 @@
+* Managing the Workspace
+It's common to want to create new windows in your Emacs frame to maximize screen estate and make editing easier.
+
+| Key   | Window                            |
+|-------+-----------------------------------|
+| =C-x 0= | Delete current window             |
+| =C-x 1= | Maximize current window           |
+| =C-x 2= | Split current window /horizontally/ |
+| =C-x 3= | Split current window /vertically/   |
+
+** Winner-mode
+/Winner-mode/ is a global minor mode. When activated, it allows you to "undo" and "redo" changes in the window configuration.
+
+| Key       | Action      |
+|-----------+-------------|
+| C-c left  | =winner-undo= |
+| C-c right | =winner-redo= |
+
+The keybinding for switching between windows is =C-x o=, which I find overly complex for such an essential key.
+
+** WindMove
+/WindMove/ is a library included in Emacs starting with version 21. It lets you switch between windows using Shift + arrow keys. To activate it on startup, add the following piece of code in your =init.el=.
+
+#+BEGIN_SRC emacs-lisp
+(when (fboundp 'windmove-default-keybindings)
+  (windmove-default-keybindings))
+#+END_SRC
+
+** Ace-window
+[[https://github.com/abo-abo/ace-window][ace-window]] lets you quickly switch between windows. It's the one I'm currently using, and I'm very happy with it.
+
+#+BEGIN_SRC emacs-lisp
+(use-package ace-window
+  :bind (("M-q" . ace-window)))
+#+END_SRC
+
+I'd bind it to =M-q=, or anything else you find convenient.
+
+*** 🢒 [[file:thoughtspeed-motion.org][Thought-speed Motion]]                                         :noexport:

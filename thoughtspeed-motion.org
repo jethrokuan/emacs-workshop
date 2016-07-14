@@ -1,0 +1,98 @@
+* Thought-speed Motion
+With a more usable Emacs configuration, we'll begin exploring how to navigate around Emacs, installing helper libraries where relevant.
+
+I recommend printing [[https://www.gnu.org/software/emacs/refcards/pdf/refcard.pdf][this refcard]], to be referred to when needed.
+
+The first rule to moving around quickly is to *never leave the keyboard*. This concept is pervalent across all pertinent text editors, be it Vim or Emacs. In Emacs, key combinations are the gateway to text-editing nirvana.
+
+** Moving Across Lines
+The most common line-movement operations are listed below.
+
+| Key | Movement                     | Emacs Function        |
+|-----+------------------------------+-----------------------|
+| =C-e= | End of line                  | =(end-of-line)=         |
+| =C-a= | Start of line                | =(beginning-of-line)=   |
+| =M-m= | first non-whitespace of line | =(back-to-indentation)= |
+
+#+BEGIN_QUOTE
+PROTIP: To check what a key combination is bound to, press =C-h k kbd=. Alternatively, =M-x describe-keybindings= lists all defined keys and their definitions in order of precedence.
+#+END_QUOTE
+
+** Moving Within Visible Text
+[[https://github.com/abo-abo/avy][avy]] is a package for jumping to visible text using a char-based decision tree. Within three keystrokes, you're able to get to any visible point in the buffer.
+
+#+BEGIN_SRC emacs-lisp
+(use-package avy
+  :bind* (("C-'" . avy-goto-char)
+          ("C-," . avy-goto-char-2)))
+#+END_SRC
+
+#+BEGIN_QUOTE
+PROTIP: To jump back to your previous location, use =C-u C-space=.
+#+END_QUOTE
+
+** Moving Within the Buffer
+*** isearch
+/isearch/ is short for incremental search. On several occasions you find yourself wanting to move to a different location of the document, knowing the textual content in the area. You can move to the location using the /isearch/, bound to =C-s=. To move to the next matching search result, press =C-s= again. The search can also be performed in the reverse direction, and this is bound to =C-r=.
+
+*** moccur
+/moccur/ is short for multi-occur. Some find this useful, but I personally feel like Swiper (introduced below) is sufficient for my day to day operations. The key benefit of /moccur/ is that a buffer for search result matches is created, and this can be used to move to the matched locations again.
+
+*** imenu
+imenu is short for interactive menu. Imenu offers a way to find the major definitions in a file by name. For example, in an Emacs Lisp (=.el=) file, you can navigate around with imenu to variables, and function definitions. In org-mode, you can navigate to title headers with imenu. Because of its utility, I bind it to =M-i=.
+
+#+BEGIN_SRC emacs-lisp
+(bind-key* "M-i" imenu)
+#+END_SRC
+
+To use =bind-key=, you need =use-package= installed. Skip this step if you intend to install counsel, described below.
+
+** Ivy, Counsel and Swiper
+Ivy is a generic completion mechanism for Emacs. It aims to be smaller, simpler and more highly customizable.
+
+Counsel provides a collection of Ivy-enhanced versions of command Emacs commands, including =find-file=, =describe-function= and =M-x=.
+
+[[https://github.com/abo-abo/swiper][Swiper]], the ivy-enhanced version of isearch.
+#+BEGIN_SRC emacs-lisp
+(use-package counsel)
+(use-package swiper
+  :bind*
+  (("C-s" . swiper)
+   ("C-c C-r" . ivy-resume)
+   ("M-a" . counsel-M-x)
+   ("C-x C-f" . counsel-find-file)
+   ("C-c h f" . counsel-describe-function)
+   ("C-c h v" . counsel-describe-variable)
+   ("C-c i u" . counsel-unicode-char)
+   ("M-i" . counsel-imenu)
+   ("C-c g" . counsel-git)
+   ("C-c j" . counsel-git-grep)
+   ("C-c k" . counsel-ag)
+   ("C-c l" . scounsel-locate))
+  :config
+  (progn
+    (ivy-mode 1)
+    (setq ivy-use-virtual-buffers t)
+    (define-key read-expression-map (kbd "C-r") #'counsel-expression-history)
+    (ivy-set-actions
+     'counsel-find-file
+     '(("d" (lambda (x) (delete-file (expand-file-name x)))
+        "delete"
+        )))
+    (ivy-set-actions
+     'ivy-switch-buffer
+     '(("k"
+        (lambda (x)
+          (kill-buffer x)
+          (ivy--reset-state ivy-last))
+        "kill")
+       ("j"
+        ivy--switch-buffer-other-window-action
+        "other window")))))
+#+END_SRC
+
+For a powerful preconfigured alternative, consider [[https://github.com/emacs-helm/helm][helm]] and its companion tutorial [[http://tuhdo.github.io/helm-intro.html][here]]. For something like Swiper, look at [[https://github.com/ShingoFukuyama/helm-swoop][helm-swoop]].
+
+For a simpler in-built alternative, look at =ido-mode=, Mickey Petersen has a great write-up about it [[https://www.masteringemacs.org/article/introduction-to-ido-mode][here]].
+
+*** 🢒 [[file:project-management.org][Project Management]]                                       :noexport:

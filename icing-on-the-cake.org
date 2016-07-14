@@ -1,0 +1,70 @@
+* Icing on the Cake
+Here I introduce packages I've installed that are not a must, but are definitely nice to have.
+
+** [[https://github.com/roman/golden-ratio.el][golden-ratio]]
+#+NAME: golden-ratio
+Give the window you're working in more screen estate.
+
+#+BEGIN_SRC emacs-lisp
+(use-package golden-ratio
+  :diminish golden-ratio-mode
+  :config (progn
+            ;;(add-to-list 'golden-ratio-extra-commands 'ace-window)
+            (golden-ratio-mode 1)))
+#+END_SRC
+
+If you're using [[Ace-window][ace-window]], uncomment the line for golden-ratio to work properly.
+
+** [[https://github.com/Malabarba/aggressive-indent-mode][aggressive-indent]]
+Keep your code nicely aligned while you hack away at the more important stuff. Remember to disable this for languages that depend on indentation for syntax, like Python.
+
+#+BEGIN_SRC emacs-lisp
+(use-package aggressive-indent
+  :diminish aggressive-indent-mode
+  :config (add-hook 'prog-mode-hook 'aggressive-indent-mode))
+#+END_SRC
+
+** [[https://github.com/justbur/emacs-which-key][which-key]]
+Which-key is a godsend when you're first starting out using Emacs. I still refer to the list of keybindings it shows from time to time.
+
+#+BEGIN_SRC emacs-lisp
+(use-package which-key
+  :diminish which-key-mode
+  :config (add-hook 'after-init-hook 'which-key-mode))
+#+END_SRC
+
+** [[https://github.com/k-talo/volatile-highlights.el][volatile-highlights]]
+Volatile-highlights provides visual feedback for operations such as yanking by highlighting the relevant regions.
+
+#+BEGIN_SRC emacs-lisp
+(use-package volatile-highlights
+  :defer 5
+  :diminish volatile-highlights-mode
+  :config (volatile-highlights-mode t))
+#+END_SRC
+
+** [[https://github.com/wasamasa/firestarter][firestarter]]
+firestarter lets you execute commands (including shell commands) on save. Example use cases include compiling SASS files, and compiling a program.
+
+#+BEGIN_SRC emacs-lisp
+(use-package firestarter
+  :bind ("C-c m s" . firestarter-mode)
+  :init (put 'firestarter 'safe-local-variable 'identity))
+#+END_SRC
+
+** [[https://github.com/nonsequitur/git-gutter-plus][git-gutter+]]
+I use git-gutter+ primarily for showing on the left side what parts of my files have changed. It also has additional features like staging hunks for commits, but I use [[Magit][Magit]] for that. You can take a look at the Github page for more details.
+
+#+BEGIN_SRC emacs-lisp
+(use-package git-gutter+
+  :init (global-git-gutter+-mode)
+  :diminish git-gutter+-mode
+  :defer 5
+  :config (progn
+            (setq git-gutter+-modified-sign "==")
+            (setq git-gutter+-added-sign "++")
+            (setq git-gutter+-deleted-sign "--")))
+#+END_SRC
+** Honourable Mentions
+1. [[https://github.com/abo-abo/hydra][hydra]]
+2. [[https://github.com/zk-phi/electric-align][electric-align]]

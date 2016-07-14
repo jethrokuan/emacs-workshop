@@ -1,0 +1,114 @@
+* Project Management
+In most cases, your work is not limited to a single file. Instead, it's comprised of multiple files residing in a parent directory, or perhaps even version-controlled with Git or the likes.
+
+While Emacs does not ship with project management tooling, there are a few quality libraries that help you with that.
+
+** FFIP
+[[https://github.com/technomancy/find-file-in-project][find-file-in-project]], or /ffip/ in short, provides quick access to files in a directory managed by version-control (git/svn/mecurial). It's intentionally kept simple. It uses GNU find under the hood, which makes it suitable even for large codebases. The default interface has been recently changed to /ivy/ (introduced [[Ivy, Counsel and Swiper][earlier]]). Look no further than ffip for a simple project-management tool.
+
+#+BEGIN_SRC emacs-lisp
+(use-package find-file-in-project
+  :bind (("s-f" . find-file-in-project)
+         ("s-F". find-file-in-current-directory)
+         ("M-s-f" . find-file-in-project-by-selected))) 
+#+END_SRC
+
+The functions are so useful they deserve a short keybinding: =s-f= is what I'd go with.
+
+** Projectile
+[[https://github.com/bbatsov/projectile][Projectile]] is a different beast, leveraging a variety of tools to be a performant project interaction library. While ffip aims to be a minimalistic and fast file-switcher for projects, projectile aims to be the all-encompassing project-management tool. It has certainly proved to be the only one you'll need.
+
+Here are some handpicked features Projectile has to offer, as seen on the Github page:
+
+- jump to a file in project
+- jump to files at point in project
+- jump to a project buffer
+- jump to a test in project
+- toggle between files with same names but different extensions (e.g. .h <-> .c/.cpp, Gemfile <-> Gemfile.lock)
+- toggle between code and its test (e.g. main.service.js <-> main.service.spec.js)
+- switch between projects you have worked on
+- replace in project
+- regenerate project etags or gtags (requires ggtags).
+- run =make= in a project with a single key chord
+
+I bind the projectile keymap to =C-x p=. If you use =ivy=, set the =projectile-completion-system= to =ivy=, and install [[https://github.com/ericdanan/counsel-projectile][counsel-projectile]], which adds more ivy-friendly functions for projectile.
+
+#+BEGIN_SRC emacs-lisp
+(use-package projectile
+  :demand t
+  :init (projectile-global-mode 1)
+  :bind-keymap* ("C-x p" . projectile-command-map)
+  :config
+  (require 'projectile)
+  (use-package counsel-projectile 
+    :bind (("s-p" . counsel-projectile)
+           ("s-f" . counsel-projectile-find-file)
+           ("s-b" . counsel-projectile-switch-to-buffer)))
+  (setq projectile-use-git-grep t)
+  (setq projectile-completion-system 'ivy))    
+#+END_SRC
+
+Projectile also has a little known feature, called =projectile-commander=. The default action when switching projects is to perform a =find-file=, but that's not what you want most of the time. Give yourself a choice to choose between doing a =find-file=, a git-fetch, or even language specific things like starting a REPL.
+
+First, set the command to =projectile-commander=:
+
+#+BEGIN_SRC emacs-lisp
+(setq projectile-switch-project-action #'projectile-commander)
+#+END_SRC
+
+Then define the methods you want:
+#+BEGIN_SRC emacs-lisp
+(def-projectile-commander-method ?s
+  "Open a *eshell* buffer for the project."
+  (projectile-run-eshell))
+(def-projectile-commander-method ?c
+  "Run `compile' in the project."
+  (projectile-compile-project nil))
+(def-projectile-commander-method ?\C-?
+  "Go back to project selection."
+  (projectile-switch-project))
+(def-projectile-commander-method ?d
+  "Open project root in dired."
+  (projectile-dired))
+(def-projectile-commander-method ?F
+  "Git fetch."
+  (magit-status)
+  (call-interactively #'magit-fetch-current))
+(def-projectile-commander-method ?j
+  "Jack-in."
+  (let* ((opts (projectile-current-project-files))
+         (file (ido-completing-read
+                "Find file: "
+                opts
+                nil nil nil nil
+                (car (cl-member-if
+                      (lambda (f)
+                        (string-match "core\\.clj\\'" f))
+                      opts)))))
+    (find-file (expand-file-name
+                file (projectile-project-root)))
+    (run-hooks 'projectile-find-file-hook)
+    (cider-jack-in))))
+#+END_SRC
+
+Append all these code into =:config= for the =projectile= package.
+
+** Using Ag or Grep
+Projectile ships with functions that make use of grep and ag. Grep and Ag are both command-line tools used for searching code. You use =projectile-ag= (=C-x p s s)= or =projectile-grep= (=C-x p s g=) to perform a project-scoped search, and use the search results to navigate to the relevant locations. Ag is more performant, but does not come installed with most systems. In most cases, grep is sufficiently fast.
+
+Alternatively, if you had installed counsel by following the instructions [[Ivy, Counsel and Swiper][here]], you'd have access to the function, =counsel-ag=, =counsel-git=, and =counsel-git-grep=. =counsel-git-grep= (=C-c j=) is especially great for projects, because it prunes out files captured by =.gitignore=.
+
+** Magit
+[[https://github.com/magit/magit][Magit]] is an interface for Git. It is an absolute joy to use, and is one of the main reasons I stuck with Emacs after a period with Vim.
+
+#+BEGIN_SRC emacs-lisp
+(use-package magit  
+  :bind (("C-x g" . magit-status)
+         ("C-x M-g" . magit-blame))
+  :init (setq magit-auto-revert-mode nil)
+  :config (add-hook 'magit-mode-hook 'hl-line-mode))
+#+END_SRC
+
+Surely you can figure out the basics like adding remotes, fetching, and committing with such a simplified interface. [[https://www.youtube.com/watch?v=mtliRYQd0j4][Here's]] a great tutorial on how to perform rebases, squashes and the like easily with Magit.
+
+*** 🢒 [[file:icing-on-the-cake.org][Icing on the Cake]]                                        :noexport:
