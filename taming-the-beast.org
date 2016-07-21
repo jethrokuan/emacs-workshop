@@ -104,8 +104,7 @@ Backup files are important, but they tend to litter your directories. The follow
       `((".*" ,temporary-file-directory t)))
 #+END_SRC
 
-**** Purging Old Backup Files
-If you put the following code into your =init.el=, Emacs will look through the temp directory on startup and purge old backup files.
+When added to your =init.el=, the code will make Emacs scan the temp directory and purge old backup files on startup.
 #+BEGIN_SRC emacs-lisp
 (let ((week (* 60 60 24 7))
       (current (float-time (current-time))))

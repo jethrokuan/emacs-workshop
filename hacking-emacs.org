@@ -7,6 +7,7 @@
 #+INCLUDE: "./taming-the-beast.org"
 #+INCLUDE: "./managing-the-workspace.org"
 #+INCLUDE: "./thoughtspeed-motion.org"
+#+INCLUDE: "./thoughtspeed-editing.org"
 #+INCLUDE: "./project-management.org"
 #+INCLUDE: "./icing-on-the-cake.org"
 
@@ -16,5 +17,6 @@
 3. [[file:taming-the-beast.org][Taming the Beast]]
 4. [[file:managing-the-workspace.org][Managing the Workspace]]
 5. [[file:thoughtspeed-motion.org][Thoughtspeed Motion]]
-6. [[file:project-management.org][Project Management]]
-7. [[file:icing-on-the-cake.org][Icing on the Cake]]
+6. [[file:thoughtspeed-editing.org][Thoughtspeed Editing]]
+7. [[file:project-management.org][Project Management]]
+8. [[file:icing-on-the-cake.org][Icing on the Cake]]

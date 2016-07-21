@@ -1,0 +1,77 @@
+* Thought-speed Editing
+** Moving Text Around
+[[Killing, Yanking and the CUA][Earlier]], I introduced the terminology Emacs uses for its clipboard system. I missed one vital piece, because I felt it was more appropriate to introduce here to keep things fresh.
+
+Text that gets killed is erased, and then stored inside the *kill ring*. This stored text is then retrievable by *yanking*. There is only one kill ring, global to Emacs. 
+
+A clear distinction has to be made between killing and deleting. Deleting text removes it from the buffer, but does not store it in the kill ring. Therefore extra caution has to be made when performing deletions.
+
+*** Deleting Text
+Here are the more useful text deletion commands:
+
+#+ATTR_LATEX: :align lp{6cm}l
+| Key     | Action                                                                 | Function                  |
+|---------+------------------------------------------------------------------------+---------------------------|
+| =M-\=     | Delete spaces and tabs around point                                    | =(delete-horizontal-space)= |
+| =M-SPC=   | Delete spaces and tabs around point, leaving one space                 | =(just-one-space)=          |
+| =C-x C-o= | Delete blank lines around current line                                 | =(delete-blank-lines)=      |
+| =M-^=     | Join two lines by deleting intervening newline, along with indentation | =(delete-indentation)=      |
+
+*** Killing Text
+Here are the more useful text killing commands:
+
+| Key     | Action                             | Function                 |
+|---------+------------------------------------+--------------------------|
+| =C-k=     | Kill line                          | =(kill-line)=              |
+| =C-w=     | Kill region                        | =(kill-region)=            |
+| =C-x DEL= | Kill back to beginning of sentence | =(backward-kill-sentence)= |
+| =M-k=     | Kill to end of sentence            | =(kill-sentence)=          |
+
+#+BEGIN_QUOTE
+NOTE: By default, a sentence is delimited by a period, followed by *two* spaces. This is so that Emacs can differentiate between abbrieviations (M. J. for example), and actual sentences. It is recommended that you follow the two space convention, but if you insist, =(setq sentence-end-double-space nil)= should do the trick.
+#+END_QUOTE
+
+*** Yanking Text
+Here are the more useful text killing commands:
+
+| Key   | Action                                                        | Function           |
+|-------+---------------------------------------------------------------+--------------------|
+| =C-y=   | Yank last killed text                                         | =(yank)=             |
+| =M-y=   | Replace last killed text with an earlier batch of killed text | =(yank-pop)=         |
+| =M-w=   | Save region as last killed text without performing the kill   | =(kill-ring-save)=   |
+| =C-M-w= | Append next kill to last batch of killed text                 | =(append-next-kill)= |
+
+You can think of the kill ring as a stack, so you could continuously pop the kill ring to obtain earlier batches of killed text.
+
+*** browse-kill-ring
+I often defer to [[https://github.com/browse-kill-ring/browse-kill-ring][browse-kill-ring]] to access my kill-ring history. I bind it to =M-y=, replacing =(yank-pop)=. Try it out, and see if it suits your workflow.
+
+#+BEGIN_SRC emacs-lisp
+(use-package browse-kill-ring
+  :bind ("M-y" . browse-kill-ring))
+#+END_SRC
+
+** Zap-to-char
+As an ex-vim user, I miss the =ct= and =dt= key dearly. Fret not, for what vim can do, emacs can do better.
+
+=zap-up-to-char= does exactly what it says it does: it kills up to, but not including the ARGth occurrence of CHAR.
+
+#+BEGIN_SRC emacs-lisp
+(autoload 'zap-up-to-char "misc"
+  "Kill up to, but not including ARGth occurrence of CHAR."
+  'interactive)
+
+(bind-key* "M-z" 'zap-up-to-char)
+#+END_SRC
+
+Let's play with some examples:
+
+#+BEGIN_VERSE
+I think I love to eat pancakes and bananas.
+#+END_VERSE
+
+We begin from the start of the sentence. Now let's say we want to kill up to "think", I'd do =M-z t RET=. If I wanted to kill up to "to", then I provide an argument value of 2 to =zap-up-to-char= by pressing =M-2 M-z t RET=.
+
+Remember that the text is /killed/, which means it gets saved into the kill ring and can be retrieved at a later point in time through yanking.
+
+*** 🢒 [[file:project-management.org][Project Management]]                                           :noexport:
