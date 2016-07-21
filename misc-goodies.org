@@ -1,0 +1,74 @@
+* Miscellaneous Goodies
+** Minimizing Startup Time
+*** Emacs Daemon
+One way to avoid all perceived boot time, is to start emacs during the system boot as a daemon. This is the option I have gone with.
+
+All you need to do add the Emacs daemon to auto-start:
+
+#+BEGIN_SRC bash
+emacs --daemon
+#+END_SRC
+
+I use /systemd/ instead. For this option, create a user /systemd/ service file with the following content:
+
+#+BEGIN_SRC txt
+[Unit]
+Description=Emacs: the extensible, self-documenting text editor
+Documentation=man:emacs(1) info:Emacs
+
+[Service]
+Type=forking
+ExecStart=/usr/bin/emacs --daemon
+ExecStop=/usr/bin/emacsclient --eval "(progn (setq kill-emacs-hook nil) (kill emacs))"
+Environment=DISPLAY=:%i
+TimeoutStartSec=0
+Restart=on-failure
+
+[Install]
+WantedBy=default.target
+#+END_SRC
+
+To enable the service on startup, just do =systemd enable --user emacsd.service=.
+
+*** Profiling with esup 
+Esup can perform a profile of your current configuration. Esup is obtainable over MELPA, so go ahead and use =use-package= like we normally do:
+
+#+BEGIN_SRC emacs-lisp
+(use-package esup
+  :defer t)
+#+END_SRC
+
+Next, just execute esup with =M-x esup=. A separate emacs process will start, and the profiling results will be returned in a separate window, which would look like this:
+
+#+CAPTION: esup profiling results
+[[./images/esup.png]]
+
+You can take note of the packages that take the longest amount of time to initialize, and weigh their alternatives. For example, I might contemplate removing git-gutter+ or replacing it with a more lightweight alternative.
+
+** Micro-optimizations with keyfreq
+Once you've determined your Emacs style, you begin to use the same keybindings again and again. Understanding which functions are invoked most often, allows you to optimize your workflow by binding them to shorter, more accessible key combinations.
+
+[[https://github.com/dacap/keyfreq][keyfreq]] monitors your keypresses during daily Emacs usage.
+
+#+BEGIN_SRC emacs-lisp
+(use-package keyfreq
+  :config
+  (keyfreq-mode 1)
+  (keyfreq-autosave-mode 1))
+#+END_SRC
+
+After a period of Emacs usage, run =M-x keyfreq-show=. Perform micro-optimizations based on the results. After which, =M-x keyfreq-reset= to rinse and repeat.
+
+** Remapping Capslock
+The capslock key is, without doubt, one of the most underused keys of the keyboard (that is if you're normal). Do yourself a favour -- especially if you're on a Mac -- and remap it to something more useful. I recommend remapping it to the elusive Ctrl key. On the Mac, you can remap it in the keyboard preferences pane.
+
+** Ergonomic Keybindings
+Anyone who spends enough time at the keyboard is at risk of repetitive strain injury, or RSI. Spend some time reflecting on how often you stretch out your pinky or move your thumb into awkward positions to press a key.
+
+*** M-x
+Let's face it. =M-x= is actually pretty damn hard to hit. /x/ is highly inaccessible, not even on alternative keyboard layouts like Dvorak.
+
+In [[https://github.com/bbatsov/prelude][prelude]], =M-x= is bound to =C-x C-m=. I bind =M-x= to =M-a=, which is originally bound to =backward-sentence=, which I don't use much at all. Both are viable options.
+
+*** ergoemacs
+[[https://ergoemacs.github.io/][ergoemacs]] is a package developed to bring familiar keys to Emacs. You could follow the instructions on the webpage to have it installed, but I recommend looking at their keybindings at adopting just the ones you think you'll like.
