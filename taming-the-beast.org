@@ -35,7 +35,7 @@ In similar effect, we enable the Org-mode repository, which contains the most up
   (package-initialize))
 #+END_SRC
 
-The more security conscious will note that packages are fetched using HTTP, instead of HTTPS. HTTPS, however, did not work for me. Refer [[https://glyph.twistedmatrix.com/2015/11/editor-malware.html][her]]e for the reasons why you might want to do so, and how to do it.
+The more security conscious will note that packages are fetched using HTTP, instead of HTTPS. HTTPS, however, did not work for me. Refer [[https://glyph.twistedmatrix.com/2015/11/editor-malware.html][here]] for the reasons why you might want to do so, and how to do it.
 
 *** Setting User Details
 These variables are used in some packages:

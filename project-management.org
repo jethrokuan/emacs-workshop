@@ -48,15 +48,15 @@ I bind the projectile keymap to =C-x p=. If you use =ivy=, set the =projectile-c
   (setq projectile-completion-system 'ivy))    
 #+END_SRC
 
-Projectile also has a little known feature, called =projectile-commander=. The default action when switching projects is to perform a =find-file=, but that's not what you want most of the time. Give yourself a choice to choose between doing a =find-file=, a git-fetch, or even language specific things like starting a REPL.
+Projectile also has a little known feature: =projectile-commander=. The default action upon switching projects is =find-file=, and that might not be desirable. Give yourself a choice between doing a =find-file=, a git-fetch, or even language specific things like starting a REPL.
 
-First, set the command to =projectile-commander=:
+First, set the projectile to utilize =projectile-commander=:
 
 #+BEGIN_SRC emacs-lisp
 (setq projectile-switch-project-action #'projectile-commander)
 #+END_SRC
 
-Then define the methods you want:
+Next, define the methods you want:
 #+BEGIN_SRC emacs-lisp
 (def-projectile-commander-method ?s
   "Open a *eshell* buffer for the project."
