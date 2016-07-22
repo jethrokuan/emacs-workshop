@@ -51,6 +51,23 @@ I often defer to [[https://github.com/browse-kill-ring/browse-kill-ring][browse-
   :bind ("M-y" . browse-kill-ring))
 #+END_SRC
 
+** Templating
+[[https://github.com/joaotavora/yasnippet][yasnippet]] is a templating system for Emacs, allowing you to type an abbrieviation and automatically expand it into function templates. This feature is similar to the one offered by Textmate; in fact, the templating language is inherited from Textmate.
+
+#+BEGIN_SRC emacs-lisp
+(use-package yasnippet
+  :diminish yas-global-mode yas-minor-mode
+  :defer 5
+  :init (add-hook 'after-init-hook 'yas-global-mode)
+  :config (setq yas-snippet-dirs '("~/.emacs.d/snippets/")))
+#+END_SRC
+
+Andrea Crotti maintains an [[https://github.com/AndreaCrotti/yasnippet-snippets][official repo]] for yasnippet templates, which supports various languages and major-modes. I recommend forking the repository -- as I did -- and cloning it into a sub-directory under =~/.emacs.d=. This way, you can add your own templates and version control them. Above, I had set the =yas-snippet-dirs= to =~/.emacs.d/snippets=, so following that configuration:
+
+#+BEGIN_SRC bash
+git submodule add git@github.com:foobar/snippets.git ~/.emacs.d/snippets
+#+END_SRC
+
 ** Zap-to-char
 As an ex-vim user, I miss the =ct= and =dt= key dearly. Fret not, for what vim can do, emacs can do better.
 
