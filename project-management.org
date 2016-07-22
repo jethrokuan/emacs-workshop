@@ -4,7 +4,7 @@ In most cases, your work is not limited to a single file. Instead, it's comprise
 While Emacs does not ship with project management tooling, there are a few quality libraries that help you with that.
 
 ** FFIP
-[[https://github.com/technomancy/find-file-in-project][find-file-in-project]], or /ffip/ in short, provides quick access to files in a directory managed by version-control (git/svn/mecurial). It's intentionally kept simple. It uses GNU find under the hood, which makes it suitable even for large codebases. The default interface has been recently changed to /ivy/ (introduced [[Ivy, Counsel and Swiper][earlier]]). Look no further than ffip for a simple project-management tool.
+[[https://github.com/technomancy/find-file-in-project][find-file-in-project]], or /ffip/ in short, provides quick access to files in a directory managed by version-control (git/svn/mercurial). It's intentionally kept simple. It uses GNU find under the hood, which makes it suitable even for large codebases. The default interface has been recently changed to /ivy/ (introduced [[Ivy, Counsel and Swiper][earlier]]). Look no further than ffip for a simple project-management tool.
 
 #+BEGIN_SRC emacs-lisp
 (use-package find-file-in-project

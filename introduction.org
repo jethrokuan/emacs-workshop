@@ -17,7 +17,7 @@ A *frame* is a container for windows. While inaccurate, one can think of it as t
 #+CAPTION: A pictorial representation of windows, frames and buffers. In this picture, there are 1 frame, 3 windows and 3 buffers.
 [[./images/windowframebuffers.png]]
 
-An Emacs beginner might find the distinction betweeen a buffer and a window unnecessary. This distinction is made because a different windows can display the same buffer, and this may come in useful when juxtaposing text in different positions of the file.
+An Emacs beginner might find the distinction between a buffer and a window unnecessary. This distinction is made because a different window can display the same buffer, and this may come in useful when juxtaposing text in different positions of the file.
 *** Killing, Yanking and the CUA
 The biggest deviation from modern standards in Emacs would most likely be the Emacs clipboard system. The table below shows the analogous terminologies for the clipboard system:
 
