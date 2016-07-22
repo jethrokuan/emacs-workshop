@@ -74,4 +74,11 @@ We begin from the start of the sentence. Now let's say we want to kill up to "th
 
 Remember that the text is /killed/, which means it gets saved into the kill ring and can be retrieved at a later point in time through yanking.
 
+If you use [[Moving Within Visible Text][avy]], perhaps you'll find [[https://github.com/mrkkrp/zzz-to-char][zzz-to-char]] to your liking. It uses the avy interface to select which letter to zap up till.
+
+#+BEGIN_SRC emacs-lisp
+(use-package zzz-to-char
+  :bind (("M-z" . zzz-up-to-char)))
+#+END_SRC
+
 *** 🢒 [[file:project-management.org][Project Management]]                                           :noexport:

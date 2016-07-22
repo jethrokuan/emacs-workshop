@@ -123,23 +123,11 @@ I'm used to having text being overwritten when highlighted. These always saves m
 #+END_SRC
 
 *** Default Font (Optional)
-Because I love mononoki.
+Because I love [[https://github.com/tonsky/FiraCode][Fira Code]].
 
 #+BEGIN_SRC emacs-lisp
-(defvar emacs-english-font "mononoki Regular 14"
-  "the font name of English.")
-
-(defun font-exist-p (fontname)
-  "Test if this font is exist or not.
-  This function only work on GUI mode, on terminal it just
-  return nil since you can't set font for emacs on it."
-  (if (or (not fontname) (string= fontname "") (not (display-graphic-p)))
-      nil
-    (if (not (x-list-fonts fontname))
-        nil t)))
-
-(if (font-exist-p emacs-english-font)
-    (setq default-frame-alist '((emacs-english-font))))
+(add-to-list 'default-frame-alist
+             '(font . "Fira Code-12"))
 #+END_SRC
 
 *** Tabs vs Spaces (Optional)
