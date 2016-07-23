@@ -1,10 +1,10 @@
 * Taming the Beast
 Vanilla Emacs works in a variety of unfortunate ways. These defaults have grown a resistance to change over the decades.
 
-In this chapter, we perform tweaking on Emacs minutiae to improve usability, and simultaneously learn how Emacs is customized.
+We perform tweaking on Emacs minutiae, and simultaneously learn how Emacs is customized. 
 
 ** Customizing Emacs
-During initialization, Emacs attempts to load an /init/ file. The /init/ file is a Lisp program which is processed top-down. The scripting language for Emacs is aptly named *Emacs Lisp*. Emacs Lisp files typically have the file extension =.el=.
+During initialization, Emacs attempts to load an /init/ file. This /init/ file is an Emacs Lisp file, and is processed top-down.
 
 #+BEGIN_QUOTE
 PROTIP: To load vanilla Emacs, run =emacs= with the command-line switch =-q=. This will come in useful when your configuration file breaks.
@@ -25,7 +25,7 @@ The tweaks are listed in order of importance. To enable them, copy them into the
 *** Enabling Package Archives
 [[https://melpa.org/#/][MELPA]] is the de-facto package archive for Emacs. Because it is not enabled by default, we add it to the list of =package-archives=.
 
-In similar effect, we enable the Org-mode repository, which contains the most up-to-date version of =org-with-contrib=.
+Similarly, we enable the Org-mode repository, which contains the most up-to-date version of =org-with-contrib=.
 
 #+BEGIN_SRC emacs-lisp
 (when (>= emacs-major-version 24)
@@ -38,7 +38,7 @@ In similar effect, we enable the Org-mode repository, which contains the most up
 The more security conscious will note that packages are fetched using HTTP, instead of HTTPS. HTTPS, however, did not work for me. Refer [[https://glyph.twistedmatrix.com/2015/11/editor-malware.html][here]] for the reasons why you might want to do so, and how to do it.
 
 *** Setting User Details
-These variables are used in some packages:
+These variables are used in some parts of Emacs, such as email.
 
 #+BEGIN_SRC emacs-lisp
 (setq user-full-name "John Appleseed"
@@ -52,18 +52,11 @@ All these UI cruft take up precious screen estate, and should be removed.
 (tool-bar-mode -1)
 (menu-bar-mode -1)
 (scroll-bar-mode -1)
-#+END_SRC
-*** Startup Screen
-More useless stuff to be removed.
-
-#+BEGIN_SRC emacs-lisp
 (setq inhibit-splash-screen t)
 (setq inhibit-startup-message t)
 #+END_SRC
 *** Use-package
-[[https://github.com/jwiegley/use-package][use-package]] is a macro which allows you to isolate package configuration in a organized and performant fashion. It was created by John Wiegley, the current Emacs maintainer.
-
-We'll be using it to install packages, so let's go ahead and add that in.
+[[https://github.com/jwiegley/use-package][use-package]] is a macro which allows you to isolate package configuration in an organized and performant fashion. It was created by John Wiegley, the current Emacs maintainer.
 
 #+BEGIN_SRC emacs-lisp
 (unless (package-installed-p 'use-package)
@@ -88,15 +81,20 @@ It is easier to type y/n than to type yes/no.
 #+END_SRC
 
 *** Custom Files
-Emacs comes with a built-in interface to customize variable values such as font-faces. However, these get added to the bottom of your =init.el= file, which ends up looking like a mess. I like to keep these things saved in a separate file, and load them in.
+Emacs comes with a built-in interface to customize all parts of Emacs. To persist the changes you've made, Emacs saves them (by default) into your =init.el= file, which can cause it to grow out of control.
+
+I like to keep such customizations saved in a separate file.
 
 #+BEGIN_SRC emacs-lisp
 (setq custom-file "~/.emacs.d/custom.el")
 (load custom-file)
 #+END_SRC
 
+Try to put this at the bottom of your =init.el= file, so it overrides any configuration you might have added in your =init.el= file.
+
 *** Backup Files
-Backup files are important, but they tend to litter your directories. The following snippet moves the temp files to the system temp directory.
+Backup files are important, but they litter your directories with temporary files. I movs the temp files to the system temp directory.
+
 #+BEGIN_SRC emacs-lisp
 (setq backup-directory-alist
       `((".*" . ,temporary-file-directory)))
@@ -104,7 +102,7 @@ Backup files are important, but they tend to litter your directories. The follow
       `((".*" ,temporary-file-directory t)))
 #+END_SRC
 
-When added to your =init.el=, the code will make Emacs scan the temp directory and purge old backup files on startup.
+When added to your =init.el=, Emacs will scan the temp directory and purge old backup files on startup.
 #+BEGIN_SRC emacs-lisp
 (let ((week (* 60 60 24 7))
       (current (float-time (current-time))))

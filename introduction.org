@@ -1,10 +1,12 @@
 * Introduction
 ** Installing Emacs
-If you're using a Linux distribution, obtaining Emacs should be easily achievable through your respective package managers.
+If on a Linux distribution, Emacs should be available through your respective package managers.
 
 For OSX users, I recommend [[https://emacsformacosx.com/][Emacs for OSX]].
 
-This workshop assumes that a recent Emacs version (of version >24.0) has been installed. You can check your Emacs version from the command line with =emacs --version=.
+Refer [[http://stackoverflow.com/documentation/emacs/986/introduction-to-emacs#t=201607230658416845243][here]] if you have further doubts.
+
+This course assumes a recent Emacs version (of version >24.0) has been installed. You can check your Emacs version from the command line with =emacs --version=.
 
 ** Terminology
 *** Windows, Frames and Buffers
@@ -17,9 +19,8 @@ A *frame* is a container for windows. While inaccurate, one can think of it as t
 #+CAPTION: A pictorial representation of windows, frames and buffers. In this picture, there are 1 frame, 3 windows and 3 buffers.
 [[./images/windowframebuffers.png]]
 
-An Emacs beginner might find the distinction between a buffer and a window unnecessary. This distinction is made because a different window can display the same buffer, and this may come in useful when juxtaposing text in different positions of the file.
 *** Killing, Yanking and the CUA
-The biggest deviation from modern standards in Emacs would most likely be the Emacs clipboard system. The table below shows the analogous terminologies for the clipboard system:
+The table below shows analogous terminologies between Emacs clipboard system and modern standards:
 
 | Modern | Emacs             |
 |--------+-------------------|
@@ -27,7 +28,7 @@ The biggest deviation from modern standards in Emacs would most likely be the Em
 | Paste  | Yank              |
 | Copy   | Save To Kill Ring |
 
-The Emacs terminology was set in stone decades ago, long before the terms 'cut', 'copy' and 'paste' (derived from the CUA, or Common User Access) were formed.
+The Emacs terminology had been set in stone decades ago, long before the terms 'cut', 'copy' and 'paste' (derived from the CUA, or Common User Access) were formed.
 
 I will demonstrate in a later chapter why the Emacs way is better for text-editing.
 
@@ -36,26 +37,30 @@ I will demonstrate in a later chapter why the Emacs way is better for text-editi
 
 Major modes often offer the following functionality:
 
-1. Font Locking (aka syntax highlighting outside of Emacs) 
+1. Font locking (aka syntax highlighting)
 2. Indentation engines
 3. Language-specific keybindings (for refactoring etc.)
 
-In the scenario where Emacs central registry for file extensions should fail to associate the file with a major mode, Emacs will scan the first portion of the file and infer one.
+In the scenario where the Emacs central registry for file extensions should fail to associate the file with a major mode, Emacs will scan the first portion of the file and infer one.
 
-*Minor modes* can be thought of as plugins, meant to add functionality to a buffer. These are optional, and can be added locally per buffer, or globally.
+*Minor modes* can be thought of as extensions, adding functionality to a buffer. These are optional, and can be added locally on a per buffer basis, or globally affecting all buffers.
 
-An example of a popular minor mode is the /aggressive-indent mode/, which keeps the text in the buffer properly indented at all times.
+An example of a popular minor mode is the /aggressive-indent mode/, which keeps text in a buffer properly indented at all times.
 
 *** Modeline
-The bottom bar in Emacs is called the *modeline*. The modeline presents useful information, such as what modes are active. The first item in the brackets is typically the major mode, and the others are all minor modes. Note that some minor modes can be configured to not appear on the modeline (a.k.a diminished). To see the full list of modes activated, run =M-x describe-mode=, or =C-h m=.
+The bottom bar in Emacs is called the *modeline*. Each window has a modeline, which presents useful information about the buffer it displays. The first item in brackets is the major mode, and the others are all minor modes.
+
+Note that some minor modes can be configured to not appear on the modeline (a.k.a diminished). To see the full list of modes activated, run =M-x describe-mode=, or =C-h m=.
 
 #+CAPTION: A typical modeline for Emacs
 [[./images/modeline.png]]
 
 *** Keybindings and Elisp Functions
-Keybindings are combinations of keys that, when pressed, invoke functions. These functions could come out-of-the-box, be provided by a package, or be self-written. They are defined in a language called *Emacs Lisp*, also referred to as *Elisp*.
+Keybindings are combinations of keys that invoke functions when pressed. The origins of these functions can be one of three: it could come out-of-the-box, be provided by an installed package, or be self-written. 
 
-All these functions are invokable with =M-x=.
+These functions are defined in a language called *Emacs Lisp*, also referred to in short as *Elisp*. Emacs Lisp files have the file extension =.el=.
 
-*** NEXT: [[file:taming-the-beast.org][Taming the Beast]]                                         :noexport:
+The full list of functions are browsable and invokable with =M-x=.
+
+*** 🢒 [[file:taming-the-beast.org][Taming the Beast]]                                             :noexport:
 In the next chapter, we make our first modifications to Emacs, to make it a saner environment to play around with.

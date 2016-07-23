@@ -51,23 +51,6 @@ I often defer to [[https://github.com/browse-kill-ring/browse-kill-ring][browse-
   :bind ("M-y" . browse-kill-ring))
 #+END_SRC
 
-** Templating
-[[https://github.com/joaotavora/yasnippet][yasnippet]] is a templating system for Emacs, allowing you to type an abbrieviation and automatically expand it into function templates. This feature is similar to the one offered by Textmate; in fact, the templating language is inherited from Textmate.
-
-#+BEGIN_SRC emacs-lisp
-(use-package yasnippet
-  :diminish yas-global-mode yas-minor-mode
-  :defer 5
-  :init (add-hook 'after-init-hook 'yas-global-mode)
-  :config (setq yas-snippet-dirs '("~/.emacs.d/snippets/")))
-#+END_SRC
-
-Andrea Crotti maintains an [[https://github.com/AndreaCrotti/yasnippet-snippets][official repo]] for yasnippet templates, which supports various languages and major-modes. I recommend forking the repository -- as I did -- and cloning it into a sub-directory under =~/.emacs.d=. This way, you can add your own templates and version control them. Above, I had set the =yas-snippet-dirs= to =~/.emacs.d/snippets=, so following that configuration:
-
-#+BEGIN_SRC bash
-git submodule add git@github.com:foobar/snippets.git ~/.emacs.d/snippets
-#+END_SRC
-
 ** Zap-to-char
 As an ex-vim user, I miss the =ct= and =dt= key dearly. Fret not, for what vim can do, emacs can do better.
 
@@ -97,5 +80,47 @@ If you use [[Moving Within Visible Text][avy]], perhaps you'll find [[https://gi
 (use-package zzz-to-char
   :bind (("M-z" . zzz-up-to-char)))
 #+END_SRC
+
+** Templating
+[[https://github.com/joaotavora/yasnippet][yasnippet]] is a templating system for Emacs, allowing you to type an abbrieviation and automatically expand it into function templates. This feature is similar to the one offered by Textmate; in fact, the templating language is inherited from Textmate.
+
+#+BEGIN_SRC emacs-lisp
+(use-package yasnippet
+  :diminish yas-global-mode yas-minor-mode
+  :defer 5
+  :init (add-hook 'after-init-hook 'yas-global-mode)
+  :config (setq yas-snippet-dirs '("~/.emacs.d/snippets/")))
+#+END_SRC
+
+Andrea Crotti maintains an [[https://github.com/AndreaCrotti/yasnippet-snippets][official repo]] for yasnippet templates, which supports various languages and major-modes. I recommend forking the repository -- as I did -- and cloning it into a sub-directory under =~/.emacs.d=. This way, you can add your own templates and version control them. Above, I had set the =yas-snippet-dirs= to =~/.emacs.d/snippets=, so following that configuration:
+
+#+BEGIN_SRC bash
+git submodule add git@github.com:foobar/snippets.git ~/.emacs.d/snippets
+#+END_SRC
+
+** Autocompletion
+Text completion in Emacs has Emacs users split between two major factions: autocomplete and company-mode. Both have similar feature sets, but it is generally argued that company-mode is more feature-rich.
+
+The following snippet installs [[http://company-mode.github.io/][company-mode]].
+
+#+BEGIN_SRC emacs-lisp
+(use-package company
+  :defer 5
+  :diminish company-mode
+  :init (progn
+          (add-hook 'after-init-hook 'global-company-mode)
+          (setq company-dabbrev-ignore-case nil
+                company-dabbrev-code-ignore-case nil
+                company-dabbrev-downcase nil
+                company-idle-delay 0
+                company-begin-commands '(self-insert-command)
+                company-transformers '(company-sort-by-occurrence))
+          (use-package company-quickhelp
+            :config (company-quickhelp-mode 1))))
+#+END_SRC
+
+One thing that people miss from autocomplete is documentation popups. We add that functionality with [[https://github.com/expez/company-quickhelp][company-quickhelp]]. Another notable setting made was to set the delay for autocomplete to =0=. Play around with the numbers and see what you're comfortable with.
+
+Note that company-mode is merely a framework for autocompletion. To enable autocompletion for various languages, you'd need to install various company backends.
 
 *** 🢒 [[file:project-management.org][Project Management]]                                           :noexport:

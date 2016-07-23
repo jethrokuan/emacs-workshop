@@ -5,16 +5,16 @@
 
 Today, you begin your journey with Emacs, /the extensible, customizable, self-documenting real-time display editor/.
 
-Because of its complexity, Emacs will seem difficult to grok. Rest assured that learning a select few features and packages more than suffices.
+Because of its complexity, Emacs will seem difficult to grok. Rest assured that learning a select few features and packages more than suffices. This material is titled "Hacking Emacs", not only because a great deal of customization will be made, but also because you'll be learning packages that have been handpicked, to greatly boost your productivity with the least amount of learning time.
 
-The tinkerer will marvel at the masterpiece which is Emacs. We hack on Emacs because we can; every facet of Emacs is extensible and customizable. Imagine managing email, web browsing, IRC, running shell commands, and compiling code, all just a few keystrokes away. 
-
-Emacs is not for the faint of heart, so buckle up, embrace the challenge and enjoy the ride. I hope to impart a level of Emacs-fu that's sufficient for further self-exploration, and hope you'll enjoy using Emacs as much as I do.
+The tinkerer will marvel at the masterpiece which is Emacs. We hack on Emacs because we can; every facet of Emacs is extensible and customizable. Emacs is not for the faint of heart. Embrace the challenge, but most importantly enjoy the ride. I encourage you to be curious and playful throughout this course.
 
 Atom users, go grab yourselves another cup of coffee while you wait for it to load up :P.
 #+BEGIN_LaTeX
 \begin{flushright}
+#+END_LaTeX
 -- Jethro Kuan
+#+BEGIN_LaTeX
 \end{flushright}
 #+END_LaTeX
 

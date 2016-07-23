@@ -60,7 +60,7 @@ Once you've determined your Emacs style, you begin to use the same keybindings a
 After a period of Emacs usage, run =M-x keyfreq-show=. Perform micro-optimizations based on the results. After which, =M-x keyfreq-reset= to rinse and repeat.
 
 ** Remapping Capslock
-The capslock key is, without doubt, one of the most underused keys of the keyboard (that is if you're normal). Do yourself a favour -- especially if you're on a Mac -- and remap it to something more useful. I recommend remapping it to the elusive Ctrl key. On the Mac, you can remap it in the keyboard preferences pane.
+Without doubt, the capslock key is one of the most underused keys (that is if you're normal). Do yourself a favour and remap it to something more useful -- I recommend the elusive Ctrl key. On the Mac, you can remap it in the keyboard preferences pane.
 
 ** Ergonomic Keybindings
 Anyone who spends enough time at the keyboard is at risk of repetitive strain injury, or RSI. Spend some time reflecting on how often you stretch out your pinky or move your thumb into awkward positions to press a key.
@@ -71,4 +71,4 @@ Let's face it. =M-x= is actually pretty damn hard to hit. /x/ is highly inaccess
 In [[https://github.com/bbatsov/prelude][prelude]], =M-x= is bound to =C-x C-m=. I bind =M-x= to =M-a=, which is originally bound to =backward-sentence=, which I don't use much at all. Both are viable options.
 
 *** ergoemacs
-[[https://ergoemacs.github.io/][ergoemacs]] is a package developed to bring familiar keys to Emacs. You could follow the instructions on the webpage to have it installed, but I recommend looking at their keybindings at adopting just the ones you think you'll like.
+[[https://ergoemacs.github.io/][ergoemacs]] was developed to bring familiar keys to Emacs, as well as to reduce risk of RSI. While you could follow the instructions on the webpage to have it installed, I recommend studying their keybindings and adopting the ones you think you'll like.
