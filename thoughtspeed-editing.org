@@ -51,6 +51,39 @@ I often defer to [[https://github.com/browse-kill-ring/browse-kill-ring][browse-
   :bind ("M-y" . browse-kill-ring))
 #+END_SRC
 
+** Selecting Regions
+*** The Mark, the Point and the Region
+Many Emacs commands operate on an arbituary, contiguous part of the buffer, also known as the /region/. A region is delimited by two objects: the /mark/ and the /point/.
+
+The point is where your cursor (keyboard) is currently placed. =C-SPC= creates a mark at the current position of point, activating it, as well as activating the region. The region is the text between the point and the mark, regardless of which direction. To deactivate the mark, simply quit with =C-g=.
+
+Some common region commands include =kill-region=.
+
+*** Rectangular Region
+Rectangle commands operate on retangular areas of text. This may seem rather esoteric, but it occasionally presents itself as the correct tool.
+
+=C-x SPC= creates a rectangular mark. The following presents commonly used rectangular commands, all prefixed with =C-x r=, operate on rectangular regions:
+
+(Region-rectangle is short-formed as RR)
+
+#+ATTR_LATEX: :align lp{7cm}l
+| Key                | Action                                                          | Function                 |
+|--------------------+-----------------------------------------------------------------+--------------------------|
+| =C-x r k=            | Kill text in RR, saving its contents into last-killed rectangle | =(kill-rectangle)=         |
+| =C-x r M-w=          | Save text in RR into kill-ring                                  | =(copy-rectangle-as-kill)= |
+| =C-x r d=            | Delete text in RR                                               | =(delete-rectangle)=       |
+| =C-x r y=            | Yank last killed rectangle                                      | =(yank-rectangle)=         |
+| =C-x r c=            | Clear RR, replacing all text with spaces                        | =(clear-rectangle)=        |
+| =C-x r t string RET= | Replace rectangle contents with string on each line             | =(string-rectangle)=       |
+
+*** Expand Region
+[[https://github.com/magnars/expand-region.el][expand-region]] is one of those packages that you can live without, but as you use it more often, you find yourself repeatedly going back to it. [[http://emacsrocks.com/e09.html][Here's]] a great overview of expand-region.
+
+#+BEGIN_SRC emacs-lisp
+(use-package expand-region
+  :bind (("C-=" . er/expand-region)))
+#+END_SRC
+
 ** Zap-to-char
 As an ex-vim user, I miss the =ct= and =dt= key dearly. Fret not, for what vim can do, emacs can do better.
 
@@ -80,6 +113,22 @@ If you use [[Moving Within Visible Text][avy]], perhaps you'll find [[https://gi
 (use-package zzz-to-char
   :bind (("M-z" . zzz-up-to-char)))
 #+END_SRC
+
+** Multiple-cursors
+Multiple cursors would be familiar functionality to Sublime Text users. It's the perfect tool for many things, including editing variable names with visual feedback.
+
+#+BEGIN_SRC emacs-lisp
+(use-package multiple-cursors
+  :bind (("C-M-c" . mc/edit-lines)
+         ("C->" . mc/mark-next-like-this)
+         ("C-<" . mc/mark-previous-like-this)
+         ("C-c C-<" . mc/mark-all-like-this)
+         ("C-n" . mc/mark-next-lines)))
+#+END_SRC
+
+/NOTE: I rebinded "C-n", which is not recommended!/
+
+Most often, I use it in conjunction with =expand-region=: =expand-region= to select the keyword (variable names, for example), and use =C-c C-<= to select all instances of the variable, and simply type over it.
 
 ** Templating
 [[https://github.com/joaotavora/yasnippet][yasnippet]] is a templating system for Emacs, allowing you to type an abbrieviation and automatically expand it into function templates. This feature is similar to the one offered by Textmate; in fact, the templating language is inherited from Textmate.
