@@ -47,6 +47,42 @@ imenu is short for interactive menu. Imenu offers a way to find the major defini
 
 To use =bind-key=, you need =use-package= installed. Skip this step if you intend to install counsel, described below.
 
+** Registers
+#+BEGIN_QUOTE
+NOTE:Before I begin, note that while I introduce registers here, registers are not just for moving around the buffer.
+#+END_QUOTE
+
+Registers are compartments where text, rectangles, positions, window configurations and many more can be stored. Think of it as a temporal bookmarking system; these registers get wiped at the end of the Emacs process. Each register is denoted by a single character (eg. =?r= or =?1=). The register =?a= is different from the register =?A=.
+
+Whatever you store inside a register persists until it is overwritten by something else, or until the Emacs process is killed.
+
+Store a file in a register is simple:
+
+#+BEGIN_SRC emacs-lisp
+(set-register r '(file . name))
+#+END_SRC
+
+Do this for all your bookmarks, and you can quickly jump to them with =C-x r reg=.
+
+To make things simpler, bind =jump-to-register= to a more accessible key:
+
+#+BEGIN_SRC emacs-lisp
+(bind-key* "C-o" 'jump-to-register)
+#+END_SRC
+
+Putting these in your =init.el= file ensures that they will always be available. I encourage you to play around with the other forms of registers.
+
+** Bookmarks
+Bookmarks are similar to registers, but they are persisted in a file.
+
+To create a bookmark, type =C-x r m bookmark-name=. Similarly, bind =bookmark-jump= to a more accessible key:
+
+#+BEGIN_SRC emacs-lisp
+(bind-key* "C-o" 'bookmark-jump)
+#+END_SRC
+
+To change the file in which you store your bookmarks, invoke =M-x customize-variable bookmark-default-file=.
+
 ** Ivy, Counsel and Swiper
 Ivy is a generic completion mechanism for Emacs. It aims to be smaller, simpler and more highly customizable.
 
