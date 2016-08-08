@@ -137,7 +137,7 @@ I'm a fan of the 2 spaces rule.
 #+END_SRC
 
 ** Theming
-There are a [[https://emacsthemes.com/][myraid]] of themes available for your picking. Here I list the better ones:
+There are a [[https://emacsthemes.com/][myriad]] of themes available for your picking. Here I list the better ones:
 
 1. Zenburn
 2. Solarized

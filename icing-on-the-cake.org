@@ -13,10 +13,10 @@ Give the window you're working in more screen estate.
             (golden-ratio-mode 1)))
 #+END_SRC
 
-If you're using [[Ace-window][ace-window]], uncomment the line for golden-ratio to work properly.
+If you're using [[Ace-window][ace-window]], uncomment the line for golden-ratio to function properly.
 
 ** [[https://github.com/Malabarba/aggressive-indent-mode][aggressive-indent]]
-Keep your code nicely aligned while you hack away at the more important stuff. Remember to disable this for languages that depend on indentation for syntax, like Python.
+Keep your code nicely aligned while you hack away at more important stuff. Remember to disable this for languages that depend on indentation for syntax, like Python.
 
 #+BEGIN_SRC emacs-lisp
 (use-package aggressive-indent
@@ -38,7 +38,6 @@ Volatile-highlights provides visual feedback for operations such as yanking by h
 
 #+BEGIN_SRC emacs-lisp
 (use-package volatile-highlights
-  :defer 5
   :diminish volatile-highlights-mode
   :config (volatile-highlights-mode t))
 #+END_SRC

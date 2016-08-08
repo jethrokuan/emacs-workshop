@@ -2,3 +2,4 @@
 /_minted-hacking-emacs
 *.mintedcmd
 *.pyg
+*.log

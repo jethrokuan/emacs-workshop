@@ -1,9 +1,9 @@
 * Thought-speed Motion
-With a more usable Emacs configuration, we'll begin exploring how to navigate around Emacs, installing helper libraries where relevant.
+With a more usable Emacs configuration, we'll begin navigating around Emacs, installing helper libraries where relevant.
 
-I recommend printing [[https://www.gnu.org/software/emacs/refcards/pdf/refcard.pdf][this refcard]], to be referred to when needed.
+I recommend printing [[https://www.gnu.org/software/emacs/refcards/pdf/refcard.pdf][this refcard]], and refer to it when necessary.
 
-The first rule to moving around quickly is to *never leave the keyboard*. This concept is pervalent across all pertinent text editors, be it Vim or Emacs. In Emacs, key combinations are the gateway to text-editing nirvana.
+The first rule to moving around quickly is to *never leave the keyboard*. This concept is pervalent across all efficient text editors, be it Vim or Emacs. In Emacs, key combinations are the gateway to text-editing nirvana.
 
 ** Moving Across Lines
 The most common line-movement operations are listed below.
@@ -49,7 +49,7 @@ To use =bind-key=, you need =use-package= installed. Skip this step if you inten
 
 ** Registers
 #+BEGIN_QUOTE
-NOTE:Before I begin, note that while I introduce registers here, registers are not just for moving around the buffer.
+NOTE: Before I begin, note that while I introduce registers here, registers are not just for moving around the buffer.
 #+END_QUOTE
 
 Registers are compartments where text, rectangles, positions, window configurations and many more can be stored. Think of it as a temporal bookmarking system; these registers get wiped at the end of the Emacs process. Each register is denoted by a single character (eg. =?r= or =?1=). The register =?a= is different from the register =?A=.
@@ -104,7 +104,7 @@ Counsel provides a collection of Ivy-enhanced versions of command Emacs commands
    ("C-c g" . counsel-git)
    ("C-c j" . counsel-git-grep)
    ("C-c k" . counsel-ag)
-   ("C-c l" . scounsel-locate))
+   ("C-c l" . counsel-locate))
   :config
   (progn
     (ivy-mode 1)

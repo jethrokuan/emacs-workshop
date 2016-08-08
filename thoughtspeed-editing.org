@@ -119,19 +119,15 @@ Multiple cursors would be familiar functionality to Sublime Text users. It's the
 
 #+BEGIN_SRC emacs-lisp
 (use-package multiple-cursors
-  :bind (("C-M-c" . mc/edit-lines)
-         ("C->" . mc/mark-next-like-this)
+  :bind (("C->" . mc/mark-next-like-this)
          ("C-<" . mc/mark-previous-like-this)
-         ("C-c C-<" . mc/mark-all-like-this)
-         ("C-n" . mc/mark-next-lines)))
+         ("C-c C-<" . mc/mark-all-like-this)))        
 #+END_SRC
 
-/NOTE: I rebinded "C-n", which is not recommended!/
-
-Most often, I use it in conjunction with =expand-region=: =expand-region= to select the keyword (variable names, for example), and use =C-c C-<= to select all instances of the variable, and simply type over it.
+I use it in conjunction with =expand-region=: =expand-region= to select the keyword (variable names, for example), and use =C-c C-<= to select all instances of the variable, and simply type over it.
 
 ** Templating
-[[https://github.com/joaotavora/yasnippet][yasnippet]] is a templating system for Emacs, allowing you to type an abbrieviation and automatically expand it into function templates. This feature is similar to the one offered by Textmate; in fact, the templating language is inherited from Textmate.
+[[https://github.com/joaotavora/yasnippet][yasnippet]] is a templating system, allowing you to type an abbrieviation and automatically expand it into function templates with =<TAB>=. This feature is similar to the one offered by Textmate; in fact, the templating language is inherited from it.
 
 #+BEGIN_SRC emacs-lisp
 (use-package yasnippet
@@ -141,7 +137,7 @@ Most often, I use it in conjunction with =expand-region=: =expand-region= to sel
   :config (setq yas-snippet-dirs '("~/.emacs.d/snippets/")))
 #+END_SRC
 
-Andrea Crotti maintains an [[https://github.com/AndreaCrotti/yasnippet-snippets][official repo]] for yasnippet templates, which supports various languages and major-modes. I recommend forking the repository -- as I did -- and cloning it into a sub-directory under =~/.emacs.d=. This way, you can add your own templates and version control them. Above, I had set the =yas-snippet-dirs= to =~/.emacs.d/snippets=, so following that configuration:
+Andrea Crotti maintains an [[https://github.com/AndreaCrotti/yasnippet-snippets][official repo]] for yasnippet templates. It supports many languages and major-modes. I recommend forking the repository -- as I did -- and cloning it as a git submodule under =~/.emacs.d=: this way you can add your own templates and version control them. I had set the =yas-snippet-dirs= to =~/.emacs.d/snippets=, so following that configuration:
 
 #+BEGIN_SRC bash
 git submodule add git@github.com:foobar/snippets.git ~/.emacs.d/snippets
