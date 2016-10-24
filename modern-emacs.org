@@ -1,6 +1,6 @@
-#+TITLE: Hacking Emacs
+#+TITLE: Modern Emacs
 #+AUTHOR: Jethro Kuan
-#+LATEX_CLASS: org-article
+#+LATEX_CLASS: books
 
 #+INCLUDE: "./preface.org"
 #+INCLUDE: "./introduction.org"

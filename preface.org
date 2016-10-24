@@ -1,6 +1,6 @@
 * Preface
 #+BEGIN_LaTeX
-\epigraph{Emacs is a nice operating system, but what it lacks, in order to compete with Linux, is a good text editor. -- \textup{Thomer M. Gil}}
+\openepigraph{Emacs is a nice operating system, but what it lacks, in order to compete with Linux, is a good text editor.}{Thomer M. Gil}
 #+END_LaTeX
 
 Today, you begin your journey with Emacs, /the extensible, customizable, self-documenting real-time display editor/.
