@@ -5,9 +5,15 @@
 
 Today, you begin your journey with Emacs, /the extensible, customizable, self-documenting real-time display editor/.
 
-Because of its complexity, Emacs will seem difficult to grok. Rest assured that learning a select few features and packages more than suffices. This material is titled "Hacking Emacs", not only because a great deal of customization will be made, but also because you'll be learning packages that have been handpicked, to greatly boost your productivity with the least amount of learning time.
+Emacs is complex, and will seem difficult to grok. It takes a certain amount of courage, or an equal amount of frustration, to turn to Emacs. 
 
-The tinkerer will marvel at the masterpiece which is Emacs. We hack on Emacs because we can; every facet of Emacs is extensible and customizable. Emacs is not for the faint of heart. Embrace the challenge, but most importantly enjoy the ride. I encourage you to be curious and playful throughout this course.
+This material was originally titled /Hacking Emacs/, because a great deal of customization can and will be made. The tinkerer will marvel at the masterpiece which is Emacs. We hack on it because we can; every facet of Emacs is extensible and customizable.
+
+I have since renamed this piece to "Modern Emacs". Emacs has evolved over several decades, and it is important that our tools are kept up to date. I have handpicked several packages to introduce. These will greatly boost your productivity with the least amount of learning time.
+
+For the novice, this will provide you with a sane environment for you to play around and do some self-exploration. For the first time you'll own your editor: Emacs should designed specifically for your own needs. 
+
+For the intermediate, this presents itself as a literate org-mode configuration. I hope you find something useful in here you could copy.
 
 Atom users, go grab yourselves another cup of coffee while you wait for it to load up :P.
 #+BEGIN_LaTeX
