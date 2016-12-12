@@ -1,20 +1,22 @@
 * Introduction
 ** Installing Emacs
-If on a Linux distribution, Emacs should be available through your respective package managers.
+If you're on a Linux distribution, Emacs should be available through your respective package managers.
 
 For OSX users, I recommend [[https://emacsformacosx.com/][Emacs for OSX]].
 
 Refer [[http://stackoverflow.com/documentation/emacs/986/introduction-to-emacs#t=201607230658416845243][here]] if you have further doubts.
 
-This course assumes a recent Emacs version (of version >24.0) has been installed. You can check your Emacs version from the command line with =emacs --version=.
+This text assumes a recent Emacs version (of version >24.0). You can check your Emacs version with =M-x emacs-version=.
 
 ** Terminology
+Emacs is aged piece of software, so a lot of the terms it uses often confound first-timers. It is important to speak a common language, hence we begin by introducing the necessary terminology.
+
 *** Windows, Frames and Buffers
-The text you are editing in Emacs resides in an object called the *buffer*.
+The text you are editing in Emacs resides in an object called the *buffer*. It is important to note that a buffer is not a file. Buffers can contain more than just file contents: it could be an email draft, the compile error message, the list goes on. When you open a file, the file contents get loaded into a new buffer. When a buffer is saved, the buffer contents are written into the corresponding file.
 
 A *window* is a container for a buffer. A window can contain one and only one buffer.
 
-A *frame* is a container for windows. While inaccurate, one can think of it as the window configuration for Emacs.
+A *frame* is a container for windows. One can think of it as the window configuration for Emacs.
 
 #+CAPTION: A pictorial representation of windows, frames and buffers. In this picture, there are 1 frame, 3 windows and 3 buffers.
 [[./images/windowframebuffers.png]]
@@ -32,13 +34,13 @@ The Emacs terminology had been set in stone decades ago, long before the terms '
 
 I will demonstrate in a later chapter why the Emacs way is better for text-editing.
 
-*** Modes, Major Modes and Minor Modes
+** Modes, Major Modes and Minor Modes
 *Major modes* control how buffers behave. Each buffer will have /one and only one/ major mode. Most major modes tend to be language-specific. For example, when opening a Python file =foo.py=, the central Emacs register will figure out that this file is a Python file and load the Python major mode.
 
 Major modes often offer the following functionality:
 
 1. Font locking (aka syntax highlighting)
-2. Indentation engines
+2. Indentation
 3. Language-specific keybindings (for refactoring etc.)
 
 In the scenario where the Emacs central registry for file extensions should fail to associate the file with a major mode, Emacs will scan the first portion of the file and infer one.
@@ -47,7 +49,7 @@ In the scenario where the Emacs central registry for file extensions should fail
 
 An example of a popular minor mode is the /aggressive-indent mode/, which keeps text in a buffer properly indented at all times.
 
-*** Modeline
+** Modeline
 The bottom bar in Emacs is called the *modeline*. Each window has a modeline, which presents useful information about the buffer it displays. The first item in brackets is the major mode, and the others are all minor modes.
 
 Note that some minor modes can be configured to not appear on the modeline (a.k.a diminished). To see the full list of modes activated, run =M-x describe-mode=, or =C-h m=.
@@ -55,12 +57,28 @@ Note that some minor modes can be configured to not appear on the modeline (a.k.
 #+CAPTION: A typical modeline for Emacs
 [[./images/modeline.png]]
 
-*** Keybindings and Elisp Functions
-Keybindings are combinations of keys that invoke functions when pressed. The origins of these functions can be one of three: it could come out-of-the-box, be provided by an installed package, or be self-written. 
+** Emacs Lisp
+Keybindings are combinations of keys that invoke functions when pressed. The origins of these functions can be one of three: 
 
-These functions are defined in a language called *Emacs Lisp*, also referred to in short as *Elisp*. Emacs Lisp files have the file extension =.el=.
+1. It could come out-of-the-box
+2. It could be provided by an installed package
+3. It could be self-written
+
+These functions are defined in a language called *Emacs Lisp*, abbreviated as *Elisp*. Emacs Lisp files typically have the file extension =.el=.
 
 The full list of functions are browsable and invokable with =M-x=.
 
-*** 🢒 [[file:taming-the-beast.org][Taming the Beast]]                                             :noexport:
+** Keybindings
+What is =M-x=, you may ask? This is how keybindings are discussed in Emacs. In =M-x=, =M= stands for the Meta key. This key is mapped to =alt= in most systems and keyboards, but this could vary. The next important key is =Ctrl=, abbreviated as =C=. For example =C-w= on a highlighted region kills the region of text. That would be pressing =Ctrl-w=. 
+
+Because of the sheer number of functions Emacs has and could have, Many functions are invoked via more complex key combinations. Emacs does try to keep things mnemonic. For example, =C-h= is not a keybinding in itself, but opens a gateway to all the help functions. =C-h k= invokes =describe-key=, which brings up documentation for the function invoked by the next key combination. With =C-h k=, you press =Ctrl= and =h=, let go of =Ctrl= and press =k.= On the other hand, =C-h C-a= invokes =about-emacs=, which brings up the first screen that greets you on your new Emacs install. To invoke =C-h C-a=, hold =Ctrl= throughout, and press =h= then =a=.
+
+** Summary
+ - Emacs has it's own terminology, some of which we have covered in detail: windows, frames, buffers, killing and cutting.
+ - Most functions in Emacs are written in Emacs Lisp, or Elisp. These functions are invokable with =M-x=.
+ - Key combinations in Emacs are bound to invokable functions, and their complexities may vary.
+
+Armed with this new knowledge, you can begin exploring Emacs.
+
+*** [[file:absolute-beginners-guide.org][The Absolute Beginners Guide]]                                               :noexport:
 In the next chapter, we make our first modifications to Emacs, to make it a saner environment to play around with.

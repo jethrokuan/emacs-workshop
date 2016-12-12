@@ -4,6 +4,7 @@
 
 #+INCLUDE: "./preface.org"
 #+INCLUDE: "./introduction.org"
+#+INCLUDE: "./absolute-beginners-guide.org"
 #+INCLUDE: "./taming-the-beast.org"
 #+INCLUDE: "./managing-the-workspace.org"
 #+INCLUDE: "./thoughtspeed-motion.org"
