@@ -67,4 +67,4 @@ I use git-gutter+ primarily for showing on the left side what parts of my files 
 ** Honourable Mentions
 1. [[https://github.com/abo-abo/hydra][hydra]]
 2. [[https://github.com/zk-phi/electric-align][electric-align]]
-*** 🢒 [[file:misc-goodies.org][Miscellaneous Goodies]]                                        :noexport:
+*** [[file:misc-goodies.org][Miscellaneous Goodies]]                                          :noexport:

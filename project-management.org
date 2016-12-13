@@ -111,4 +111,4 @@ Alternatively, if you had installed counsel by following the instructions [[Ivy,
 
 Surely you can figure out the basics like adding remotes, fetching, and committing with such a simplified interface. [[https://www.youtube.com/watch?v=mtliRYQd0j4][Here's]] a great tutorial on how to perform rebases, squashes and the like easily with Magit.
 
-*** 🢒 [[file:icing-on-the-cake.org][Icing on the Cake]]                                        :noexport:
+*** [[file:icing-on-the-cake.org][Icing on the Cake]]                                              :noexport:

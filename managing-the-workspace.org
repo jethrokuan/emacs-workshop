@@ -36,4 +36,4 @@ The keybinding for switching between windows is =C-x o=, which I find overly com
 
 I'd bind it to =M-q=, or anything else you find convenient.
 
-*** 🢒 [[file:thoughtspeed-motion.org][Thought-speed Motion]]                                         :noexport:
+*** [[file:thoughtspeed-motion.org][Thought-speed Motion]]                                           :noexport:

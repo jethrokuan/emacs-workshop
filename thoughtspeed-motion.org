@@ -131,4 +131,4 @@ For a powerful preconfigured alternative, consider [[https://github.com/emacs-he
 
 For a simpler in-built alternative, look at =ido-mode=, Mickey Petersen has a great write-up about it [[https://www.masteringemacs.org/article/introduction-to-ido-mode][here]].
 
-*** 🢒 [[file:thoughtspeed-editing.org][Thoughtspeed Editing]]                                         :noexport:
+*** [[file:thoughtspeed-editing.org][Thoughtspeed Editing]]                                           :noexport:

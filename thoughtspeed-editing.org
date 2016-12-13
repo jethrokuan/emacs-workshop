@@ -168,4 +168,4 @@ One thing that people miss from autocomplete is documentation popups. We add tha
 
 Note that company-mode is merely a framework for autocompletion. To enable autocompletion for various languages, you'd need to install various company backends.
 
-*** 🢒 [[file:project-management.org][Project Management]]                                           :noexport:
+*** [[file:project-management.org][Project Management]]                                             :noexport:

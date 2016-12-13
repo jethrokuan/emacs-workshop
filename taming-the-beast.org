@@ -56,7 +56,7 @@ All these UI cruft take up precious screen estate, and should be removed.
 #+END_SRC
 
 *** Use-package
-[[https://github.com/jwiegley/use-package][use-package]] is a macro which allows you to isolate package configuration in an organized and performant fashion. It is written by John Wiegley, the current Emacs maintainer.
+[[https://github.com/jwiegley/use-package][use-package]] is a macro which allows you to isolate package configuration in an organized and performant fashion. It is written by John Wiegley, the current Emacs maintainer. Before you move on, I recommend briefly browsing through the [[https://github.com/jwiegley/use-package][REAME]], to familiarize yourself with the macro syntax.
 
 #+BEGIN_SRC emacs-lisp
 (unless (package-installed-p 'use-package)
@@ -93,10 +93,8 @@ I like to keep such customizations saved in a separate file.
 (load custom-file)
 #+END_SRC
 
-Try to put this at the bottom of your =init.el= file, so it overrides any configuration you might have added in your =init.el= file.
-
 *** Backup Files
-Backup files are important, but they litter your directories with temporary files. I movs the temp files to the system temp directory.
+Backup files are important, but they litter your work directories with temporary files. Instead, with the following configuration temp files are created in the system temp directory.
 
 #+BEGIN_SRC emacs-lisp
 (setq backup-directory-alist
@@ -136,8 +134,7 @@ There are a [[https://emacsthemes.com/][myriad]] of themes available for your pi
 3. Leuven (has an impressive org-mode theme)
 4. Monokai
 5. Tomorrow by Sanityinc
-6. Darkorai
-7. Ample
+6. Ample
 
 Usually, themes are named =foo-theme= in MELPA.
 
@@ -149,4 +146,4 @@ Usually, themes are named =foo-theme= in MELPA.
 
 At this point you should have quite a hefty amount of modification done. Remember to save your configuration directory into version control.
 
-*** 🢒 [[file:managing-the-workspace.org][Managing The Workspace]]                                   :noexport:
+*** [[file:managing-the-workspace.org][Managing The Workspace]]                                         :noexport:

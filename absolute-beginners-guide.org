@@ -1,16 +1,24 @@
 * The Absolute Beginners Guide
-It is important that I be careful to impart Emacs knowledge objectively. Each individual has differing personal development practices, and Emacs is to be customized to suit one's needs. It is therefore paramount that you absorb this material with a different mindset.
+** A Mindful Approach
+It is important that I be careful to impart Emacs knowledge objectively. Each individual has differing personal development practices, and Emacs is to be customized to suit one's needs. Hence, it is paramount that you absorb this material with a questioning mindset.
 
-Before the deep dive begins, I'd like you to create a blank text file. This file will contain questions that arise while going through the material. For example, one might think: I have this feature, multiple-cursors in Sublime Text, how do I do the same (or better) in Emacs? Or how do I compile my C++ files directly in Emacs?
+Before we begin, I'd like you to create a blank text file. Fill this file with questions that arise while going through the material. For example: you may be used to the multiple-cursors feature in Sublime Text, how do I do the same (or better) in Emacs? Or maybe you work with C++ intimately, and would like to know how to compile my C++ files from within Emacs.
 
 There many different paths to Emacs mastery, but most include the following steps:
 
-1. Muscle memory. Removing the conscious effort in figuring out which key combinations to press, allows clarity of thought, and empowered by Emacs allows you to code/write at unimaginable speeds.
+1. Muscle memory. Removing the conscious effort in figuring out which key combinations to press, allows clarity of thought. Emacs will empower you to code/write at unimaginable speeds.
 2. Aggressive Optimization. Be on the constant lookout for things you perform often in your daily work, and ensure these are easily accessible with key combinations. If functions are yet available for your purposes, write one.
 
-The keybindings that you'll come across in this material are personal preference, and are only for your reference. Take note of keybindings that you dislike, and note them down to be replaced later.
+The keybindings that you'll come across in this material are either the defaults or personal preference, and are only for your reference. Take note of keybindings that you dislike, and note them down to be replaced later.
 
 ** Baby Steps
-TBC
+I often hear complaints that Emacs is huge in terms of file size, compared to other editors like Vim. This is no longer a cause for concern, with hard disk space becoming larger and cheaper by the day. One reason why Emacs is so large, is because it hosts a great many things, and this includes a manual and a tutorial.
+
+The tutorial is great for newcomers, and I would like you to go through it before we begin. You can access the tutorial via =C-h t=.
+
+** And that's it!
+Now, you should be minimally competent with Emacs. One thing I found to be extra useful when I first started out was to print out a cheatsheet, and put it up somewhere accessible near my computer. Making your own is fun (especially if you do so in Emacs), but there are plenty available that are a quick search away. [[https://www.google.com.sg/url?sa=t&rct=j&q=&esrc=s&source=web&cd=2&cad=rja&uact=8&ved=0ahUKEwjvwoiX0PDQAhWGuo8KHTJ2Af0QFggjMAE&url=https%253A%252F%252Fwww.gnu.org%252Fsoftware%252Femacs%252Frefcards%252Fps%252Frefcard.ps.gz&usg=AFQjCNHxeH0-ZtB7F-95ByLTDRfVB0JZCA][Here's]] one by GNU themselves.
+
+You may be unimpressed by Emacs thus far, but I encourage you to stick on a little longer; things are just starting to get interesting. We are now armed with sufficient knowledge to begin making modifications to Emacs.
 
 *** [[file:taming-the-beast.org][Taming the Beast]]                                               :noexport:
