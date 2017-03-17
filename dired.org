@@ -1,0 +1,68 @@
+* Dired
+ Dired works by querying ls (or an emulated equivalent if it is not
+ available) and formatting the printed output from ls. In fact, the
+ GNU version of ls comes with a switch -D specifically designed to
+ format the output to suit dired (though it’s not used in newer
+ Emacsen.)
+
+| key | command                                       |
+| j   | =dired-goto-file=                             |
+| d   | flag for deletion                             |
+| u   | remove deletion flag                          |
+| DEL | Move point to prev line, remove deletion flag |
+| x   | execute                                       |
+
+#+BEGIN_SRC emacs-lisp
+  (setq delete-by-moving-to-trash t)
+#+END_SRC
+
+
+| key | command                                 |
+| o   | display file's buffer in another window |
+| v   | view file                               |
+
+| key        | command                                    |
+| % m regexp | mark with * all files that match regexp    |
+| % g regexp | mark all files whose contents match regexp |
+** Diffing
+| key | command      |
+| =   | =dired-diff= |
+** Inserting contents from subdirectories
+| key | command         |
+| i   | insert contents |
+
+** isearch in dired
+#+BEGIN_SRC emacs-lisp
+  (setq dired-isearch-filenames 'dwim)
+#+END_SRC
+** wdired
+| key     | command          |
+| C-x C-q | toggle read-only |
+| C-c C-c | finish edit      |
+
+#+BEGIN_SRC emacs-lisp
+  (setq wdired-allow-to-change-permissions t)
+#+END_SRC
+** isearch
+| key         | command +               |
+| M-s a C-s   | dired-do-isearch        |
+| M-s a C-M-s | dired-do-isearch-regexp |
+
+** dired-k
+#+BEGIN_SRC emacs-lisp
+  (use-package dired-k
+    :config
+    (define-key dired-mode-map (kbd "K") 'dired-k)
+    (setq dired-k-style 'git))
+#+END_SRC
+** dired-narrow
+   - use in conjection with wdired
+
+** dired-ranger
+#+BEGIN_SRC emacs-lisp
+  (use-package dired-ranger
+    :bind (:map dired-mode-map
+                ("C" . dired-ranger-copy)
+                ("P" . dired-ranger-paste)
+                ("M" . dired-ranger-move)))
+#+END_SRC
