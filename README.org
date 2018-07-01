@@ -4,6 +4,6 @@ This is an attempt at producing course material for Emacs.
 
 The material is highly opinionated. For example, I handpick certain MELPA packages like /use-package/ to introduce.
 
-The pdf file can be found [[./hacking-emacs.pdf][here]].
+The pdf file can be found [[./modern-emacs.pdf][here]].
 
 [[file:modern-emacs.org][Start Here]]
